@@ -89,6 +89,10 @@ public class PsqlStore implements Store {
         }
     }
 
+    @Override
+    public void saveCandidate(Candidate candidate) {
+    }
+
     private Post create(Post post) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("INSERT INTO post(name) VALUES (?)", PreparedStatement.RETURN_GENERATED_KEYS)

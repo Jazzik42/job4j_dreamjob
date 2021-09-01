@@ -6,13 +6,11 @@ import java.util.Objects;
 public class Post {
     private int id;
     private String name;
-    private String description;
     private LocalDateTime created = LocalDateTime.now();
 
-    public Post(int id, String name, String description) {
+    public Post(int id, String name) {
         this.id = id;
         this.name = name;
-        this.description = description;
     }
 
     public int getId() {
@@ -29,14 +27,6 @@ public class Post {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public LocalDateTime getCreated() {
