@@ -137,5 +137,22 @@ public class PsqlStore implements Store {
         }
         return post;
     }
+
+    @Override
+    public Candidate findCandidateById(int id) {
+        Candidate can = null;
+        try (Connection cn = pool.getConnection(); PreparedStatement ps = cn.prepareStatement(
+                "select * from candidate where id = ?")) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    can = new Candidate(rs.getInt(1), rs.getString(2));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return can;
+    }
 }
 
