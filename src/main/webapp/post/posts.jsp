@@ -1,3 +1,6 @@
+<%@ page import="ru.job4j.dream.model.Candidate" %>
+<%@ page import="ru.job4j.dream.model.User" %>
+<%@ page import="ru.job4j.dream.store.PsqlStore" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!doctype html>
@@ -22,12 +25,40 @@
 </head>
 <body>
 <div class="container pt-3">
-
+    <%
+        String id = request.getParameter("id");
+        Candidate candidate = new Candidate(0,"");
+        if (id != null) {
+            candidate = PsqlStore.instOf().findCandidateById(Integer.parseInt(id));
+        }
+        HttpSession hs = request.getSession();
+        User user = (User) hs.getAttribute("user");
+    %>
     <div class="row">
-        <div class="card" style="width: 100%">
-            <div class="card-header">
-                Вакансии
-            </div>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/post/posts.do">Вакансии</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/candidate/candidates.do">Кандидаты</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
+            </li>
+            <% if (user == null) { %>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp">Войти</a>
+            </li>
+            <% } else { %>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp">  <%=user.getName()%> | Выйти</a>
+                <% } %>
+            </li>
+        </ul>
+    </div>
             <div class="card-body">
                 <table class="table">
                     <thead>

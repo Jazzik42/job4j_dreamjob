@@ -1,3 +1,6 @@
+<%@ page import="ru.job4j.dream.model.Candidate" %>
+<%@ page import="ru.job4j.dream.store.PsqlStore" %>
+<%@ page import="ru.job4j.dream.model.User" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <!doctype html>
@@ -20,9 +23,15 @@
     <title>Работа мечты</title>
 </head>
 <body>
-<li class="nav-item">
-    <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp">Войти</a>
-</li>
+<%
+    String id = request.getParameter("id");
+    Candidate candidate = new Candidate(0,"");
+    if (id != null) {
+        candidate = PsqlStore.instOf().findCandidateById(Integer.parseInt(id));
+    }
+    HttpSession hs = request.getSession();
+    User user = (User) hs.getAttribute("user");
+%>
 <div class="container">
     <div class="row">
         <ul class="nav">
@@ -35,8 +44,15 @@
             <li class="nav-item">
                 <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
             </li>
+            </li>
+            <% if (user == null) { %>
             <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp">Войти</a>
+            </li>
+            <% } else { %>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp">  <%=user.getName()%> | Выйти</a>
+                <% } %>
             </li>
         </ul>
     </div>
