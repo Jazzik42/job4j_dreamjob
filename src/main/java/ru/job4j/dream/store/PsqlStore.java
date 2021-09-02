@@ -93,7 +93,7 @@ public class PsqlStore implements Store {
     }
 
     @Override
-    public void saveCandidate(Candidate candidate) {
+    public void save(Candidate candidate) {
         if (candidate.getId() == 0) {
             createCandidate(candidate);
         } else {
@@ -188,6 +188,17 @@ public class PsqlStore implements Store {
             LOG.error("Error during finding candidate", e);
         }
         return can;
+    }
+
+    @Override
+    public void deleteCandidate(int id) {
+        try (Connection cn = pool.getConnection();
+            PreparedStatement ps = cn.prepareStatement("delete from candidate where id = ?", PreparedStatement.RETURN_GENERATED_KEYS)) {
+            ps.setInt(1, id);
+            ps.execute();
+        } catch (Exception e) {
+            LOG.error("Error during deleting candidate", e);
+        }
     }
 }
 

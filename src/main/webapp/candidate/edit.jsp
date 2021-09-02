@@ -33,7 +33,7 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 <% if (id == null) { %>
-                Новая кандидат.
+                Новый кандидат.
                 <% } else { %>
                 Редактирование профиля кандидата.
                 <% } %>

@@ -1,5 +1,6 @@
+<%@ page import="ru.job4j.dream.store.Store" %>
+<%@ page import="ru.job4j.dream.store.PsqlStore" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,41 +21,21 @@
     <title>Работа мечты</title>
 </head>
 <body>
-<li class="nav-item">
-    <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp">Войти</a>
-</li>
-<div class="container">
-    <div class="row">
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/post/posts.do">Вакансии</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/candidate/candidates.do">Кандидаты</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
-            </li>
-        </ul>
-    </div>
+<%
+    String id = request.getParameter("id");
+    String name = null;
+    if (id != null) {
+        Store store = PsqlStore.instOf();
+        name = store.findCandidateById(Integer.parseInt(id)).getName();
+        store.deleteCandidate(Integer.parseInt(request.getParameter("id")));
+    }
+%>
+<div class="container pt-3">
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Сегодняшние вакансии.
-            </div>
-            <div class="card-body">
-            </div>
-        </div>
-    </div>
-    <div class="row pt-3">
-        <div class="card" style="width: 100%">
-            <div class="card-header">
-                Сегодняшние кандидаты.
-            </div>
-            <div class="card-body">
+                Удаление кандидата c именем <%= name%> произошло успешно.
+                <a class="nav-link" href="<%=request.getContextPath()%>/candidate/candidates.do">вернуться к списку кандидатов</a>
             </div>
         </div>
     </div>
