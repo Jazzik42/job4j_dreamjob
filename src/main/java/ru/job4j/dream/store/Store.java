@@ -1,5 +1,6 @@
 package ru.job4j.dream.store;
 
+import ru.job4j.dream.EmailException;
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.model.User;
@@ -21,7 +22,7 @@ public interface Store {
 
     void deleteCandidate(int id);
 
-    void addUser(User user);
+    void addUser(User user) throws EmailException;
 
     User findUserById(int id);
 

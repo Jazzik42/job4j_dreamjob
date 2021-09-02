@@ -40,9 +40,10 @@
                     <button type="submit" class="btn btn-primary">Войти</button>
                     <c:if test="${not empty error}">
                         <div style="color:red; font-weight: bold; margin: 30px 0;">
-                                ${error}
+                            Неверный логин и/или пароль.
                         </div>
                     </c:if>
+                    <a class="nav-link" href="<%=request.getContextPath()%>/reg.jsp">Зарегистрироваться</a>
                 </form>
             </div>
         </div>

@@ -1,6 +1,7 @@
 package ru.job4j.dream.store;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import ru.job4j.dream.EmailException;
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
 import org.slf4j.Logger;
@@ -206,7 +207,7 @@ public class PsqlStore implements Store {
     public User findUserById(int id) {
         User rsl = null;
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("select * from users where id = (?)", PreparedStatement.RETURN_GENERATED_KEYS)
+             PreparedStatement ps = cn.prepareStatement("select * from users where id =  ? ", PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setInt(1, id);
             ps.execute();
@@ -227,16 +228,17 @@ public class PsqlStore implements Store {
     }
 
     @Override
-    public void addUser(User user) {
+    public void addUser(User user) throws EmailException {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("INSERT INTO users(name, email, password) VALUES ((?), (?), (?))",
+             PreparedStatement ps = cn.prepareStatement("INSERT INTO users(name, email, password) VALUES (?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, user.getName());
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPassword());
             ps.execute();
         } catch (Exception e) {
-            LOG.error("Error during adding user ", e);
+            LOG.error("Error during adding user", e);
+            throw new EmailException("Invalid email");
         }
     }
 
@@ -244,7 +246,7 @@ public class PsqlStore implements Store {
     public User findUserByEmail(String email) {
         User rsl = null;
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("select * from users where email = (?)", PreparedStatement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement ps = cn.prepareStatement("select * from users where email =  ? ", PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, email);
             ps.execute();
             try (ResultSet rs = ps.getResultSet()) {
@@ -257,7 +259,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.error("Message from findUserByEmail method ", e);
+            LOG.error("Error during finding user", e);
         }
         return rsl;
     }
