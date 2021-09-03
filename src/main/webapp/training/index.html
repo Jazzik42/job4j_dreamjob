@@ -7,27 +7,39 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function validate() {
+            var ml = $('#mail').val()
+            var fn = $('#firstName').val()
+            var ln = $('#lastName').val()
+            if (ml === '') {
+                alert('Mail field must not be empty');
+            } else if (fn === '') {
+                alert('First name field must not be empty');
+            } else if (ln === '') {
+                alert('Last name field must not be empty');
+            }
+            return false;
+        }
+    </script>
 </head>
 <body>
 
 <div class="container-fluid">
     <h1>My First Bootstrap Page</h1>
-    <p>This is some text.</p>
 </div>
 <form>
     <div class="form-group">
-        <label for="exampleFormControlInput1">Почта</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="почта@почта.com">
+        <label for="mail">Почта</label>
+        <input type="email" class="form-control" id="mail" placeholder="почта@почта.com">
     </div>
     <div class="form-group">
-        <label for="exampleFormControlSelect1">Example select</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-        </select>
+        <label for="firstName">Имя</label>
+        <input type="text" class="form-control" id="firstName" placeholder="имя">
+    </div>
+    <div class="form-group">
+        <label for="lastName">Фамилия</label>
+        <input type="text" class="form-control" id="lastName" placeholder="фамилия">
     </div>
     <div class="form-group">
         <label for="exampleFormControlSelect2">Example multiple select</label>
@@ -43,6 +55,7 @@
         <label for="exampleFormControlTextarea1">Example textarea</label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
+    <button type="submit" class="btn btn-primary" onclick="return validate();">Submit</button>
 </form>
 <table class="table">
     <thead>
