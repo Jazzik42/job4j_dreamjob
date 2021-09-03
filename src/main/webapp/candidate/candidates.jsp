@@ -85,7 +85,7 @@
                                         <i> Удалить кандидата </i>
                                     </a>
                                 </a>
-                                <img src='<c:url value="/upload.do?id=${can.id}&can=${can}"/>' class="card-img-top" alt="Нет фото" width="80px" height="150px">
+                                <img src='<c:url value="/upload?id=${can.id}&can=${can}"/>' class="card-img-top" alt="Нет фото" width="80px" height="150px">
 
 
                             </td>

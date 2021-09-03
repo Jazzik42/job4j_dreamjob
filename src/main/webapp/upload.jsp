@@ -23,7 +23,7 @@
                     <c:if test="${can.id == image}">
             <tr valign="top">
                 <td><a href="<c:url value='/download?name=${image}&id='/><%=id%>">Download</a></td>
-                <td><a href="<c:url value='/delete.do?name=${image}&id='/><%=id%>">Удалить</a></td>
+                <td><a href="<c:url value='/delete?name=${image}&id='/><%=id%>">Удалить</a></td>
                 <td>
                     <img src="<c:url value='/download?name=${image}'/>" width="100px" height="100px"/>
                 </td>
@@ -33,7 +33,7 @@
         </tbody>
     </table>
     <h2>Upload image</h2>
-    <form action="<c:url value='/upload.do?id='/><%=id%>" method="post" enctype="multipart/form-data">
+    <form action="<c:url value='/upload?id='/><%=id%>" method="post" enctype="multipart/form-data">
         <div class="checkbox">
             <input type="file" name="file">
         </div>

@@ -54,10 +54,6 @@
     <filter-name>AuthFilter</filter-name>
     <filter-class>ru.job4j.dream.filter.AuthFilter</filter-class>
   </filter>
-
-
-
-
   <filter-mapping>
     <filter-name>AuthFilter</filter-name>
     <url-pattern>*.do</url-pattern>
@@ -68,16 +64,15 @@
     <url-pattern>/reg</url-pattern>
   </servlet-mapping>
 
-
   <servlet-mapping>
     <servlet-name>LogoutServlet</servlet-name>
-    <url-pattern>/logout.do</url-pattern>
+    <url-pattern>/logout</url-pattern>
   </servlet-mapping>
 
 
   <servlet-mapping>
     <servlet-name>AuthServlet</servlet-name>
-    <url-pattern>/auth.do</url-pattern>
+    <url-pattern>/auth</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
@@ -92,12 +87,12 @@
 
   <servlet-mapping>
     <servlet-name>UploadServlet</servlet-name>
-    <url-pattern>/upload.do</url-pattern>
+    <url-pattern>/upload</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
     <servlet-name>DeleteServlet</servlet-name>
-    <url-pattern>/delete.do</url-pattern>
+    <url-pattern>/delete</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
