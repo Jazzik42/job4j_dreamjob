@@ -21,6 +21,20 @@
             }
             return false;
         }
+        function addRow() {
+            $('#table tr:last').after(
+                + '<td>' + 3 +'</td>'
+                + '<td>' + ml +'</td>'
+                + '<td>' + fn +'</td>'
+                + '<td>' + ln +'</td></tr>'
+            );
+            //получаем значение поля usr
+            const name = $('#usr').val();
+
+            //получаем ссылку на последний элемент в таблице.
+            //и после него добавляем html
+            $('#table tr:last').after('<tr><td>' + name +'</td></tr>');
+        }
     </script>
 </head>
 <body>
@@ -57,33 +71,35 @@
     </div>
     <button type="submit" class="btn btn-primary" onclick="return validate();">Submit</button>
 </form>
-<table class="table">
+<table class="table" id ="table">
+    <button type="reset" class="btn btn-default" onclick="addRow()">Add row</button>
     <thead>
     <tr>
         <th scope="col">#</th>
+        <th scope="col">Почта</th>
         <th scope="col">Имя</th>
         <th scope="col">Фамилия</th>
-        <th scope="col">Почта</th>
     </tr>
     </thead>
     <tbody>
     <tr>
         <th scope="row">1</th>
+        <td>@mail</td>
         <td>Рамиль</td>
         <td>Музипов</td>
-        <td>@mail</td>
     </tr>
     <tr>
         <th scope="row">2</th>
+        <td>@mail</td>
         <td>Рамиль</td>
         <td>Музипов</td>
-        <td>@mail</td>
+
     </tr>
     <tr>
         <th scope="row">3</th>
+        <td>@mail</td>
         <<td>Рамиль</td>
         <td>Музипов</td>
-        <td>@mail</td>
     </tr>
     </tbody>
 </table>
